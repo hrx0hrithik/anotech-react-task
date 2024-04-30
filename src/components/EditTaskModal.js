@@ -7,6 +7,7 @@ function EditTaskModal({ isOpen, onClose, task, updateTask }) {
 
   const handleUpdateTask = () => {
     updateTask({ ...task, name: editedTaskName, description: editedTaskDescription });
+    console.log("updated")
     onClose();
   };
 

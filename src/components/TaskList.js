@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   List,
   ListItemText,
@@ -10,9 +9,7 @@ import {
 import { Delete, Edit } from "@mui/icons-material";
 import EditTaskModal from "./EditTaskModal";
 
-function TaskList({ allTask, deleteTask, updateTask }) {
-  const [editModalOpen, setEditModalOpen] = useState(false);
-  const [editedTask, setEditedTask] = useState(null);
+function TaskList({ allTask, deleteTask, updateTask, editModalOpen, setEditModalOpen, editedTask, setEditedTask }) {
 
   const openEditModal = (task) => {
     setEditedTask(task);
