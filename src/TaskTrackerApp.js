@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 
-function TaskTrakerApp() {
+function TaskTrackerApp() {
     const [allTask, setAllTask] = useState([])
   return (
     <div>TaskTrakerApp</div>
   )
 }
 
-export default TaskTrakerApp
+export default TaskTrackerApp
