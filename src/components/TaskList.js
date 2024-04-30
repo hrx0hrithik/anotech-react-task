@@ -9,8 +9,15 @@ import {
 import { Delete, Edit } from "@mui/icons-material";
 import EditTaskModal from "./EditTaskModal";
 
-function TaskList({ allTask, deleteTask, updateTask, editModalOpen, setEditModalOpen, editedTask, setEditedTask }) {
-
+function TaskList({
+  allTask,
+  deleteTask,
+  updateTask,
+  editModalOpen,
+  setEditModalOpen,
+  editedTask,
+  setEditedTask,
+}) {
   const openEditModal = (task) => {
     setEditedTask(task);
     setEditModalOpen(true);
@@ -31,6 +38,7 @@ function TaskList({ allTask, deleteTask, updateTask, editModalOpen, setEditModal
                 <Grid item xs={12} sm={6} key={index}>
                   <Paper sx={{ p: 2, display: "flex" }}>
                     <ListItemText
+                      sx={{ marginX: 2 }}
                       primary={task.name}
                       secondary={task.description}
                     />
@@ -47,13 +55,14 @@ function TaskList({ allTask, deleteTask, updateTask, editModalOpen, setEditModal
               ))}
             </Grid>
           </List>
-          {editedTask &&
-           <EditTaskModal
-            isOpen={editModalOpen}
-            onClose={closeEditModal}
-            task={editedTask}
-            updateTask={updateTask}
-          />}
+          {editedTask && (
+            <EditTaskModal
+              isOpen={editModalOpen}
+              onClose={closeEditModal}
+              task={editedTask}
+              updateTask={updateTask}
+            />
+          )}
         </div>
       ) : (
         <div>No Task</div>
