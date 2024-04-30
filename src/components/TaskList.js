@@ -1,38 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   List,
-  ListItem,
   ListItemText,
-  ListItemSecondaryAction,
   IconButton,
   Paper,
   Grid,
+  Box,
 } from "@mui/material";
-import { Delete } from "@mui/icons-material";
+import { Delete, Edit } from "@mui/icons-material";
+import EditTaskModal from "./EditTaskModal";
 
-function TaskList({ allTask, deleteTask }) {
-    console.log(allTask)
+function TaskList({ allTask, deleteTask, updateTask }) {
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [editedTask, setEditedTask] = useState(null);
+
+  const openEditModal = (task) => {
+    setEditedTask(task);
+    setEditModalOpen(true);
+  };
+
+  const closeEditModal = () => {
+    setEditedTask(null);
+    setEditModalOpen(false);
+  };
+
   return (
     <>
       {allTask.length !== 0 ? (
-        <List>
-          <Grid container spacing={2} column={12}>
-          {allTask.map((task, index) => (
-            <Grid item xs={12} sm={6}>
-            <Paper sx={{ p: 2, display: "flex" }} key={index}>
-              <ListItemText primary={task.name} secondary={task.description} />
-                <IconButton onClick={() => deleteTask(index)} edge="end">
-                  <Delete />
-                </IconButton>
-            </Paper>
-            </Grid>
-          ))}
-          </Grid>
-        </List>
-      ) : (
         <div>
-            No Task
+          <List>
+            <Grid container spacing={2} column={12}>
+              {allTask.map((task, index) => (
+                <Grid item xs={12} sm={6} key={index}>
+                  <Paper sx={{ p: 2, display: "flex" }}>
+                    <ListItemText
+                      primary={task.name}
+                      secondary={task.description}
+                    />
+                    <Box>
+                      <IconButton onClick={() => openEditModal(task)}>
+                        <Edit />
+                      </IconButton>
+                      <IconButton onClick={() => deleteTask(index)}>
+                        <Delete />
+                      </IconButton>
+                    </Box>
+                  </Paper>
+                </Grid>
+              ))}
+            </Grid>
+          </List>
+          {editedTask &&
+           <EditTaskModal
+            isOpen={editModalOpen}
+            onClose={closeEditModal}
+            task={editedTask}
+            updateTask={updateTask}
+          />}
         </div>
+      ) : (
+        <div>No Task</div>
       )}
     </>
   );
