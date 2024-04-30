@@ -21,11 +21,14 @@ import ChecklistIcon from '@mui/icons-material/Checklist';
 import SettingsIcon from '@mui/icons-material/Settings';
 import TaskList from "./components/TaskList";
 import TaskForm from "./components/TaskForm";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
 function TaskTrackerApp() {
   const [allTask, setAllTask] = useState([]);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
 
   const addTask = (task) => {
     setAllTask([...allTask, task]);
@@ -38,8 +41,6 @@ function TaskTrackerApp() {
     setAllTask(updatedTasks);
   };
 
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [isClosing, setIsClosing] = React.useState(false);
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -62,7 +63,7 @@ function TaskTrackerApp() {
       <Divider />
       <List>
           <ListItem >
-            <ListItemButton>
+            <ListItemButton component={Link} to="/" >
               <ListItemIcon>
                 <FormatListBulletedIcon />
               </ListItemIcon>
@@ -70,7 +71,7 @@ function TaskTrackerApp() {
             </ListItemButton>
           </ListItem>
           <ListItem >
-            <ListItemButton>
+            <ListItemButton component={Link} to="/completed" >
               <ListItemIcon>
                 <ChecklistIcon />
               </ListItemIcon>
@@ -78,7 +79,7 @@ function TaskTrackerApp() {
             </ListItemButton>
           </ListItem>
           <ListItem >
-            <ListItemButton>
+            <ListItemButton component={Link} to="/setting" >
               <ListItemIcon>
                 <SettingsIcon />
               </ListItemIcon>
@@ -119,14 +120,13 @@ function TaskTrackerApp() {
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
           variant="temporary"
           open={mobileOpen}
           onTransitionEnd={handleDrawerTransitionEnd}
           onClose={handleDrawerClose}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
           }}
           sx={{
             display: { xs: "block", sm: "none" },
