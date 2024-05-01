@@ -5,6 +5,7 @@ import {
   Paper,
   Grid,
   Box,
+  Checkbox,
 } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
 import EditTaskModal from "./EditTaskModal";
@@ -17,6 +18,8 @@ function TaskList({
   setEditModalOpen,
   editedTask,
   setEditedTask,
+  isChecked,
+  setIsChecked
 }) {
   const openEditModal = (task) => {
     setEditedTask(task);
@@ -37,8 +40,9 @@ function TaskList({
               {allTask.map((task, index) => (
                 <Grid item xs={12} sm={6} key={index}>
                   <Paper sx={{ p: 2, display: "flex" }}>
+                    <Checkbox checked={isChecked} onChange={() => setIsChecked(prev => !prev)} />
                     <ListItemText
-                      sx={{ marginX: 2 }}
+                      sx={{ marginX: 2, textDecorationLine: (isChecked ? "line-through" : "none") }}
                       primary={task.name}
                       secondary={task.description}
                     />

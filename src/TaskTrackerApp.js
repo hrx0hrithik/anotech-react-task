@@ -6,7 +6,7 @@ import TaskForm from "./components/TaskForm";
 
 const drawerWidth = 240;
 
-function TaskTrackerApp() {
+function TaskTrackerApp({ isChecked, setIsChecked }) {
   const [allTask, setAllTask] = useState([]);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [editedTask, setEditedTask] = useState(null);
@@ -62,6 +62,8 @@ function TaskTrackerApp() {
           editModalOpen={editModalOpen}
           editedTask={editedTask}
           setEditedTask={setEditedTask}
+          isChecked={isChecked}
+          setIsChecked={setIsChecked}
         />
       </Grid>
     </Box>

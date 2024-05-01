@@ -27,6 +27,9 @@ export default function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
 
+  const [isChecked, setIsChecked] = useState(false)
+
+
   const handleDrawerClose = () => {
     setIsClosing(true);
     setMobileOpen(false);
@@ -76,7 +79,7 @@ export default function App() {
             mobileOpen={mobileOpen}
           />
           <Routes>
-            <Route path="/" element={<TaskTrackerApp />} />
+            <Route path="/" element={<TaskTrackerApp isChecked={isChecked} setIsChecked={setIsChecked} />} />
             <Route path="/completed" element={<CompletedTask />} />
             <Route path="/setting" element={<Setting />} />
           </Routes>

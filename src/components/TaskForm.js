@@ -7,7 +7,7 @@ function TaskForm({ addTask }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTask({ name: taskName, description: taskDescription });
+    addTask({ name: taskName, description: taskDescription, isChecked: false });
     setTaskName('');
     setTaskDescription('');
   };
